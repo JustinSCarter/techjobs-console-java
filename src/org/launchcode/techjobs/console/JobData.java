@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 /**
  * Created by LaunchCode
  */
@@ -42,7 +44,8 @@ public class JobData {
                 values.add(aValue);
             }
         }
-
+        //sorts results alphabetically
+        sort(values);
         return values;
     }
 
@@ -51,7 +54,9 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        return allJobs;
+        //makes copy of allJobs to protect static property(Unsure of why?)
+        ArrayList<HashMap<String, String>> jobList = allJobs;
+        return jobList;
     }
 
     /**
@@ -74,14 +79,30 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = (row.get(column)).toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
 
         return jobs;
+    }
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> job : allJobs) {
+
+            String currentJob = (job.toString()).toLowerCase();
+
+            if (currentJob.contains(value.toLowerCase())) {
+                jobs.add(job);
+            }
+        }
+            return jobs;
     }
 
     /**
