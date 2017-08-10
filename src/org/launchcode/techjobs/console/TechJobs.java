@@ -11,7 +11,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -76,14 +76,12 @@ public class TechJobs {
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure so we can
-        // associate an integer with each one
+        // Put the choices in an ordered structure so we can associate an integer with each one
         Integer i = 0;
         for (String choiceKey : choices.keySet()) {
             choiceKeys[i] = choiceKey;
             i++;
         }
-
         do {
 
             System.out.println("\n" + menuHeader);
@@ -103,7 +101,7 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
@@ -111,6 +109,14 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        if (someJobs.isEmpty())
+            System.out.println("There are no results");
+        for (HashMap job : someJobs) {
+            System.out.println("\n*****\n" + job.get("name") + "\n" + job.get("employer") + "\n" + job.get("location") + "\n" +
+                    job.get("position type") + "\n" + job.get("core competency") + "\n*****");
+        }
+        //for job in some jobs
+        //print "***** 5 lines of job info *****"
+        //if no jobs print "no results"
     }
 }
